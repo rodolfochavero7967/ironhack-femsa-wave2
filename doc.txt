@@ -1,0 +1,25 @@
+Analisis:
+        * Principio de Responsabilidad Única (SRP): La clase SystemManager tiene múltiples responsabilidades.
+
+        * Principio de Abierto/Cerrado (OCP): La clase no está diseñada para ser extendida.
+
+        * Principio de Sustitución de Liskov (LSP): Las clases que podrían implementar diferentes tipos de procesamiento de pago deberían poder sustituirse sin modificar el comportamiento del sistema.
+
+        * Principio de Segregación de Interfaces (ISP): La clase SystemManager impone métodos a otros componentes que no los necesitan.
+
+        * Principio de Inversión de Dependencias (DIP): La clase depende de implementaciones concretas (como paymentService y emailService) en lugar de abstraerse a través de interfaces.
+
+
+
+
+Doc
+
+1.- Problema:
+    * La clase original tenía múltiples responsabilidades, lo que violaba el principio de responsabilidad única.
+2.- Qué principio SOLID se violó:
+    * Se violaron varios principios, principalmente el SRP y el OCP.
+3.- Abordar problema:
+    * Se separaron las responsabilidades en clases individuales (PaymentProcessor, NotificationService, InventoryService), lo que permite que cada clase tenga una única responsabilidad y sea más fácil de extender.
+4.- Los beneficios:
+    * Mejora la escalabilidad y mantenibilidad al permitir agregar nuevos tipos de procesamiento de pago sin modificar la clase OrderProcessor.
+    Facilita las pruebas unitarias al permitir sustituir dependencias por implementaciones simuladas.
