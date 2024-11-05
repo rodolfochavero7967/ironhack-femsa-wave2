@@ -1,0 +1,56 @@
+Pruebas de Autenticación de Usuario
+
+TEST UserAuthentication_SuccessWithValidCredentials
+  ASSERT_TRUE(authenticate("validUser", "validPass"), "Should succeed with correct credentials")
+END TEST
+
+TEST UserAuthentication_FailWithInvalidPassword
+  ASSERT_FALSE(authenticate("validUser", "wrongPass"), "Should fail with wrong credentials")
+END TEST
+
+Justificación: Separar las pruebas en dos casos independientes permite verificar de manera aislada el éxito y el fallo en la autenticación, lo que facilita el diagnóstico en caso de error.
+
+Funciones de Procesamiento de Datos
+
+TEST DataProcessing_Success
+  DATA data = fetchData()
+  processData(data)
+  ASSERT_TRUE(data.processedSuccessfully, "Data should be processed successfully")
+END TEST
+
+TEST DataProcessing_HandleError
+  DATA data = fetchDataWithError() // Simulación de datos que causan error
+  TRY
+    processData(data)
+  CATCH error
+    ASSERT_EQUALS("Data processing error", error.message, "Should handle processing errors")
+  END TRY
+END TEST
+
+Justificación: Separar la prueba de éxito y el manejo de errores asegura que cada prueba cubra un caso específico, incrementando la claridad y detectando problemas de forma más precisa.
+
+Respuesta de la Interfaz de Usuario (UI)
+
+TEST UIResponsiveness_AdjustsTo1024Width
+  UI_COMPONENT uiComponent = setupUIComponent(1024)
+  ASSERT_TRUE(uiComponent.adjustsToScreenSize(1024), "UI should adjust to width of 1024 pixels")
+END TEST
+
+TEST UIResponsiveness_AdjustsTo768Width
+  UI_COMPONENT uiComponent = setupUIComponent(768)
+  ASSERT_TRUE(uiComponent.adjustsToScreenSize(768), "UI should adjust to width of 768 pixels")
+END TEST
+
+TEST UIResponsiveness_AdjustsToMobileWidth
+  UI_COMPONENT uiComponent = setupUIComponent(375)
+  ASSERT_TRUE(uiComponent.adjustsToScreenSize(375), "UI should adjust to width of 375 pixels")
+END TEST
+
+
+Justificación: Crear pruebas para varios anchos de pantalla comunes mejora la cobertura de pruebas, asegurando que la UI sea receptiva en diferentes resoluciones.
+
+Análisis
+El análisis demuestra la importancia de pruebas específicas, centradas en un solo aspecto y
+con nombres descriptivos. Estas prácticas mejoran la capacidad de mantenimiento y la
+facilidad de diagnóstico en caso de fallos, haciendo que cada prueba sea fácil de entender y
+ajustar.
